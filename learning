@@ -52,7 +52,7 @@ pipeline {
         stage('Deploy to Test Server') {
             steps {
                 sh 'echo "Deploying to test server..."'
-                sh "scp ${ARTIFACT_NAME} user@${DEPLOY_TEST_SERVER}:/opt/tomcat/webapps/"
+                sh "scp ${ARTIFACT_NAME} user@${DEPLOY_TEST_SERVER}:9090/app1"
                 sh "ssh user@${DEPLOY_TEST_SERVER} 'stopTomcat'"
                 sh "startTomcat"
             }
@@ -76,7 +76,7 @@ pipeline {
         stage('Deploy to Production Server') {
             steps {
                 sh 'echo "Deploying to production server..."'
-                sh "scp ${ARTIFACT_NAME} user@${DEPLOY_PROD_SERVER}:/opt/tomcat/webapps/"
+                sh "scp ${ARTIFACT_NAME} user@${DEPLOY_PROD_SERVER}:9090/prod-app1"
                 sh "ssh user@${DEPLOY_PROD_SERVER} 'stopTomcat'"
                 sh "startTomcat"
             }
