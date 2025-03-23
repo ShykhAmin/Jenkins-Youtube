@@ -57,7 +57,8 @@ pipeline {
         stage('Deploy to Test Server') {
             steps {
                 sh 'echo "Deploying to test server..."'
-                sh "cp ${ARTIFACT_NAME} ${TOMCAT_TEST_WEBAPPS}" // Copy WAR file to test server's webapps directory
+                sh "sudo mkdir -p ${TOMCAT_TEST_WEBAPPS}" // Ensure the webapps directory exists
+                sh "sudo cp ${ARTIFACT_NAME} ${TOMCAT_TEST_WEBAPPS}" // Copy WAR file to test server's webapps directory
                 sh "sudo stopTomcat" // Restart Tomcat production server
                 sh "sudo startTomcat"
             }
@@ -83,7 +84,8 @@ pipeline {
         stage('Deploy to Production Server') {
             steps {
                 sh 'echo "Deploying to production server..."'
-                sh "cp ${ARTIFACT_NAME} ${TOMCAT_PROD_WEBAPPS}" // Copy WAR file to production server's webapps directory
+                sh "sudo mkdir -p ${TOMCAT_PROD_WEBAPPS}" // Ensure the webapps directory exists
+                sh "sudo cp ${ARTIFACT_NAME} ${TOMCAT_PROD_WEBAPPS}" // Copy WAR file to production server's webapps directory
                 sh "sudo stopTomcat" // Restart Tomcat production server
                 sh "sudo startTomcat"
             }
