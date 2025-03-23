@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DEPLOY_TEST_SERVER = 'http://192.169.0.108:9090'
-        DEPLOY_PROD_SERVER = 'http://192.169.0.108:9090'
+        DEPLOY_TEST_SERVER = '192.169.0.108' // Only IP address or hostname
+        DEPLOY_PROD_SERVER = '192.169.0.108' // Only IP address or hostname
         BUILD_DIR = 'target'
         ARTIFACT_NAME = 'app.war'
     }
